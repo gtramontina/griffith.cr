@@ -1,6 +1,6 @@
 <img src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Los_Angeles_Pollution.jpg">
 
-# griffith.cr
+# griffith.cr [![travis build](https://img.shields.io/travis/gtramontina/griffith.cr.svg?style=flat-square)](https://travis-ci.org/gtramontina/griffith.cr)
 
 Beautiful UI for showing tasks running on the command line.
 
