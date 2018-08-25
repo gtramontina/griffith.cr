@@ -3,10 +3,10 @@ require "./spec_helper"
 module Griffith
   describe ConsoleReporter do
     it "renders the task as reported" do
-      reporter = ConsoleReporter.new(output = MemoryIO.new)
-      reporter.report_on(task1 = Task.new("A test"))
-      reporter.report_on(task2 = Task.new("Another test"))
-      reporter.report_on(task3 = Task.new("Yet another test"))
+      reporter = ConsoleReporter.new(output = IO::Memory.new)
+      reporter.report_on(Task.new("A test"))
+      reporter.report_on(Task.new("Another test"))
+      reporter.report_on(Task.new("Yet another test"))
 
       output.to_s.split('\n').should eq [
         "A test                                              ",
@@ -18,7 +18,7 @@ module Griffith
 
     describe "when updating a task" do
       it "moves the cursor to and back from the corresponding task line" do
-        reporter = ConsoleReporter.new(output = MemoryIO.new)
+        reporter = ConsoleReporter.new(output = IO::Memory.new)
         reporter.report_on(task1 = Task.new("A test"))
         reporter.report_on(task2 = Task.new("Another test"))
         reporter.report_on(task3 = Task.new("Yet another test"))

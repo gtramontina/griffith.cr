@@ -1,70 +1,53 @@
 require "colorize"
 
 module Griffith
-  class Config
-    DEFAULT_PREFIX          = ""
-    DEFAULT_DONE_MESSAGE    = "✓ Done".colorize(:green)
-    DEFAULT_FAIL_MESSAGE    = "✗ Failed".colorize(:red)
-    DEFAULT_RUNNING_MESSAGE = "…".colorize(:yellow)
+  private class Config
+    @reporter : Reporter
+    @done_message : String
+    @fail_message : String
+    @running_message : String
 
-    Instance = new
-    setter :reporter, :prefix, :done_message, :fail_message, :running_message
-    private def initialize; end
+    INSTANCE = new
+    property :reporter, :prefix, :done_message, :fail_message, :running_message
 
-    def reporter
-      @reporter ||= ConsoleReporter.new
-    end
-
-    def prefix
-      @prefix ||= DEFAULT_PREFIX
-    end
-
-    def done_message
-      @done_message ||= DEFAULT_DONE_MESSAGE
-    end
-
-    def fail_message
-      @fail_message ||= DEFAULT_FAIL_MESSAGE
-    end
-
-    def running_message
-      @running_message ||= DEFAULT_RUNNING_MESSAGE
+    private def initialize
+      @reporter = ConsoleReporter.new
+      @prefix = ""
+      @done_message = "✓ Done".colorize(:green).to_s
+      @fail_message = "✗ Failed".colorize(:red).to_s
+      @running_message = "…".colorize(:yellow).to_s
     end
 
     def reset
-      @reporter = nil
-      @prefix = nil
-      @done_message = nil
-      @fail_message = nil
-      @running_message = nil
+      initialize
     end
 
     def self.reporter
-      Instance.reporter
+      INSTANCE.reporter
     end
 
     def self.prefix
-      Instance.prefix
+      INSTANCE.prefix
     end
 
     def self.done_message
-      Instance.done_message
+      INSTANCE.done_message
     end
 
     def self.fail_message
-      Instance.fail_message
+      INSTANCE.fail_message
     end
 
     def self.running_message
-      Instance.running_message
+      INSTANCE.running_message
     end
 
     def self.reset
-      Instance.reset
+      INSTANCE.reset
     end
   end
 
   def self.config(&block)
-    yield Config::Instance
+    yield Config::INSTANCE
   end
 end

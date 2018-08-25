@@ -1,5 +1,5 @@
 name: griffith
-version: 0.1.0
+version: 1.0.0
 
 authors:
   - Guilherme J. Tramontina <guilherme.tramontina@gmail.com>
@@ -7,13 +7,19 @@ authors:
 license: MIT
 
 dependencies:
-  fiber-safe-mutex:
-    github: gtramontina/fiber-safe-mutex.cr
   ansi-escapes:
     github: gtramontina/ansi-escapes.cr
+    version: 1.0.0
 
 development_dependencies:
+  ameba:
+    github: veelenga/ameba
+    version: 0.8.0
+
   spinner-frames:
     github: gtramontina/spinner-frames.cr
+    version: 1.0.0
+
   faker:
     github: askn/faker
+    version: 0.3.0

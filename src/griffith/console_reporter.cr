@@ -1,16 +1,18 @@
 require "./task"
+require "./reporter"
+require "./subscriber"
 require "ansi-escapes"
-require "fiber-safe-mutex"
 
 module Griffith
   class ConsoleReporter
-    include Subscriber
+    include Reporter
+    include Subscriber(Task)
     include AnsiEscapes
 
-    def initialize(@io = STDOUT)
+    def initialize(@io : IO = STDOUT)
       @tasks_lines = {} of Task => Int32
       @current_line = 1
-      @mutex = FiberSafeMutex.new
+      @mutex = Mutex.new
     end
 
     def report_on(task : Task)
@@ -27,17 +29,17 @@ module Griffith
     end
 
     private def render(task)
-      "%s%-#{50}s %s %s" % [Config.prefix, task.description, task.status_message, task.details]
+      "%s%-50s %s %s" % [Config.prefix, task.description, task.status_message, task.details]
     end
 
     private def write(text, line_number)
       @mutex.synchronize do
         position = @current_line - line_number
-        @io.print String.build do |line|
+        @io.print(String.build do |line|
           line << Cursor::HIDE << Cursor.up(position) << Erase::LINE
           line << text
           line << Cursor.down(position) << Cursor.to(0) << Cursor::SHOW
-        end
+        end)
         @io.flush
       end
     end

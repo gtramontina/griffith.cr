@@ -2,7 +2,9 @@ require "./spec_helper"
 
 module Griffith
   class PhonySubscriber
-    include Subscriber
+    include Subscriber(Task)
+    @event_name : Symbol | Nil
+    @data : Task | Nil
     getter :event_name, :data
 
     def on_event(@event_name, @data)

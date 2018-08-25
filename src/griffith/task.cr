@@ -1,42 +1,23 @@
+require "./publisher"
+
 module Griffith
-  # :nodoc:
-  module Subscriber
-  end
-
-  # :nodoc:
-  module Publisher
-    def subscribe(listener)
-      listeners << listener
-    end
-
-    private def broadcast(event_name, *args)
-      listeners.each do |listener|
-        listener.on_event(event_name, *args)
-      end
-    end
-
-    private def listeners
-      @listeners ||= [] of Subscriber
-    end
-  end
-
   class Task
-    include Publisher
+    include Publisher(Task)
 
     getter :description, :status_message, :details
 
     # Creates a new task with the given description.
-    def initialize(@description)
+    def initialize(@description : String)
     end
 
     # Sets the details text.
-    def details(@details)
+    def details(@details : String)
       broadcast(:details_updated, self)
       self
     end
 
     # Sets the status message.
-    def status_message(@status_message)
+    def status_message(@status_message : String)
       broadcast(:status_message_updated, self)
       self
     end

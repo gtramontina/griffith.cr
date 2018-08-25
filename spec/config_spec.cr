@@ -1,7 +1,11 @@
 require "./spec_helper"
 
 module Griffith
-  class DummyReporter; end
+  class DummyReporter
+    include Reporter
+
+    def report_on(_task); end
+  end
 
   Spec.after_each { Config.reset }
 
@@ -15,15 +19,15 @@ module Griffith
     end
 
     it "defaults done message" do
-      Config.done_message.should eq "✓ Done".colorize(:green)
+      Config.done_message.should eq "✓ Done".colorize(:green).to_s
     end
 
     it "defaults fail message" do
-      Config.fail_message.should eq "✗ Failed".colorize(:red)
+      Config.fail_message.should eq "✗ Failed".colorize(:red).to_s
     end
 
     it "defaults running message" do
-      Config.running_message.should eq "…".colorize(:yellow)
+      Config.running_message.should eq "…".colorize(:yellow).to_s
     end
 
     it "allows changing values" do
