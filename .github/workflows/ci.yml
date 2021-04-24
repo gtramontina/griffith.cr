@@ -1,0 +1,22 @@
+on:
+  push:
+  pull_request:
+    branches: [master]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download source
+        uses: actions/checkout@v2
+
+      - name: Install Crystal
+        uses: oprypin/install-crystal@f0b2ce0d9d45075b6da31d7130c26cfb51744ead
+
+      - name: Install shards
+        run: shards update --ignore-crystal-version
+
+      - name: Run lint
+        run: ./bin/ameba
+
+      - name: Run tests
+        run: crystal spec
