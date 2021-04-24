@@ -17,7 +17,7 @@ def run(task)
     step = 0
     pace = 0.1
     timeout = Random.rand(1..10)
-    spinner = SpinnerFrames.new(SpinnerFrames::Charset[:snake])
+    spinner = SpinnerFrames.new(SpinnerFrames::Charset[:dots])
     spawn do
       until done
         task.running(spinner.next.colorize(:blue).to_s)

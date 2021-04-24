@@ -14,11 +14,11 @@ dependencies:
 development_dependencies:
   ghooks.cr:
     github: gtramontina/ghooks.cr
-    version: 0.1.0
+    version: 1.0.0
 
   ameba:
     github: veelenga/ameba
-    version: 0.8.0
+    version: 0.14.2
 
   spinner-frames:
     github: gtramontina/spinner-frames.cr
@@ -26,4 +26,4 @@ development_dependencies:
 
   faker:
     github: askn/faker
-    version: 0.3.0
+    version: 0.5.0

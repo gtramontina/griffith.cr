@@ -1,0 +1,22 @@
+version: 2.0
+shards:
+  ameba:
+    git: https://github.com/veelenga/ameba.git
+    version: 0.14.2
+
+  ansi-escapes:
+    git: https://github.com/gtramontina/ansi-escapes.cr.git
+    version: 1.0.0
+
+  faker:
+    git: https://github.com/askn/faker.git
+    version: 0.5.0
+
+  ghooks.cr:
+    git: https://github.com/gtramontina/ghooks.cr.git
+    version: 1.0.0
+
+  spinner-frames:
+    git: https://github.com/gtramontina/spinner-frames.cr.git
+    version: 1.0.0
+
