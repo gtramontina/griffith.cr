@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Download source
-        uses: actions/checkout@v2
+        uses: actions/checkout@v2.3.4
 
       - name: Install Crystal
         uses: oprypin/install-crystal@31648d0e69d6c8eaccb0b483bb2283515b1153ae
